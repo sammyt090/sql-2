@@ -4,7 +4,7 @@ In this lecture we go over a review of the last sql lecture and start going into
 
 ## Schema
 
-The `schema` is the bluepring for how our tableis structured. This is what sets the guidelines for how the data is stored inside of our database.
+The `schema` is the blueprint for how our tables are structured. This is what sets the guidelines for how the data is stored inside of our database.
 
 A schema for our table above would look similar to this
 
@@ -17,7 +17,7 @@ CREATE TABLE racers (
 )
 ```
 
-Above, we are determining exactly what datatypes are allowed to be inserted into each coloumn for the row that is being added to our racers table in our database.
+Above, we are determining exactly what datatypes are allowed to be inserted into each column for the row that is being added to our racers table in our database.
 
 ## DataTypes
 
@@ -35,7 +35,7 @@ When setting up our schema we will determine what `data type` is allowed in our 
 
 `Float` - This data type can have values up to 15 decimal places.
 
-`Serial` - This data type is an incrementing integer, usally used with primary keys to establish uniqueness.
+`Serial` - This data type is an incrementing integer, usually used with primary keys to establish uniqueness.
 
 ### Character Values
 
@@ -53,13 +53,13 @@ SQL statements are queries that we make to our database.
 
 A few things to note about SQL Statements:
 
-1. We use a semicolon to delcare the end of a statement.
+1. We use a semicolon to declare the end of a statement.
 
 2. We can not have a trailing comma on our scripts. 
 
 3. We need to use single quotes, not double.
 
-4. It's common to use all caps, but it's not needed. It's best to stick with one way and be consistant and not use lowercase and capital characters.
+4. It's common to use all caps, but it's not needed. It's best to stick with one way and be consistent and not use lowercase and capital characters.
 
 ### Insert Statement
 
@@ -72,9 +72,9 @@ VALUES
 ('Tayte', 22, 'US')
 ```
 
-Above, we are adding myself into the database. We first delcare a insert statement with the `INSERT INTO` keyword followed by the name of the table we are inserting data into. Then in parenthesis, we select the columns to add to. We then use the `VALUES` keyword followed by another pair of parenthesis to include the data to insert into the columns.
+Above, we are adding myself into the database. We first declare a insert statement with the `INSERT INTO` keyword followed by the name of the table we are inserting data into. In parenthesis, we select the columns to add to. Use the `VALUES` keyword followed by another pair of parenthesis to include the data to insert into the columns.
 
-> Note: It's import that the data lines up with the column we want to insert that data into
+> Note: It's important that the data lines up with the column we want to insert that data into.
 
 ### Select Statement
 
@@ -85,7 +85,7 @@ SELECT *
 FROM racers
 ```
 
-Above, we delcare it's a select statement using the `SELECT` keyword. It is followed by the column name that we want to selectv data from. In this case, we used an asterik to say 'all' the data from every column. Then we declare what table to select from using the `FROM` keyword.
+Above, we declare it's a select statement using the `SELECT` keyword. It is followed by the column name that we want to select data from. In this case, we used an asterisk to say 'all' the data from every column. Then we declare what table to select from using the `FROM` keyword.
 
 #### WHERE
 
@@ -187,7 +187,7 @@ FROM racers
 WHERE name IN ('Tayte', 'Samual', 'Kevin');
 ```
 
-If we didn't use the `IN` key word, our statement would look like this
+If we didn't use the `IN` keyword, our statement would look like this
 
 ```sql
 SELECT *
@@ -229,7 +229,7 @@ FROM racers
 ORDER BY id
 ```
 
-This will organize how result in ascending order by default.
+This will organize our result in ascending order by default.
 
 ##### ASC
 
@@ -304,7 +304,7 @@ Above, we have found the average age of the racers.
 
 ### Update Statements
 
-We can  update our data inside of a database by using an `update statement`.
+We can update our data inside of a database by using an `update` statement.
 
 ```sql
 UPDATE racers
@@ -316,7 +316,7 @@ Above, we have just updated the name for the user with the id of 2. We first use
 
 ### Delete Statements
 
-We can remove or destroy data from our databased by using a `delete statement`.
+We can remove or destroy data from our database by using a `delete` statement.
 
 ```sql
 DELETE FROM racers
@@ -329,7 +329,7 @@ We first use the `DELETE FROM` keyword, then declare the table to remove from. W
 
 ## Altering Tables
 
-We can use `alter statements` to alter our tables in our database. We generally use alter statements to modify the `schema` for our tables.
+We can use `alter` statements to alter our tables in our database. We generally use alter statements to modify the `schema` for our tables.
 
 ### Adding Columns
 
@@ -346,7 +346,7 @@ ALTER COLUMN team
 SET DATA TYPE VARCHAR(100);
 ```
 
-We can also makew this shorter by using `shorthand syntax`. This way is shorter from the previous example.
+We can also make this shorter by using `shorthand syntax`. This way is shorter from the previous example.
 
 ```sql
 ALTER TABLE racers
@@ -396,11 +396,11 @@ DROP TABLE racers
 
 A relational database is built around a model of having `relationships` between different tables to establish a way for the tables to communicate with each other.
 
-There are a three main designs that we can establish for creating a `relationship` between tables.
+There are three main designs that we can establish for creating a `relationship` between tables.
 
 ### One to One
 
-This deisgn is where one entity can only talk to one other entity. I like to think about this like a social security number. Only one person will be associated with one SSN, it will never represent more than one person.
+This design is where one entity can only talk to one other entity. I like to think about this like a social security number. Only one person will be associated with one SSN, it will never represent more than one person.
 
 ![one to one](images/onetoone.png)
 
@@ -420,7 +420,7 @@ This design is where multiple entities can have a relationship with multiple ent
 
 Now that we have talked about some of the relational design patterns, you are probably wondering how we actually set this relationship up? This is where `foreign keys` come into play.
 
-A `foreign key` will set a constraint to the data that is inserted into the row. The only way it data can be inserted is if a row has a column value that matches with another specific value from another table.
+A `foreign key` will set a constraint to the data that is inserted into the row. The only way data can be inserted is if a row has a column value that matches with another specific value from another table.
 
 A `foreign key` will typically reference a `primary key` from another table.
 
@@ -433,7 +433,7 @@ CREATE TABLE bikes (
 )
 ```
 
-Above is thew syntax we would use to setup a foreign key in our schema for a table. We are saying that the `racer_id` column needs to have a matching value with a row's id from the racers table. This has now created that `relationship` between the two tables.
+Above is the syntax we would use to setup a foreign key in our schema for a table. We are saying that the `racer_id` column needs to have a matching value with a row's id from the racers table. This has now created that `relationship` between the two tables.
 
 ## Join Statements
 
