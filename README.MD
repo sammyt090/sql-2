@@ -2,6 +2,10 @@
 
 In this lecture we go over a review of the last sql lecture and start going into table relationships.
 
+## Lecture Slides
+
+https://slides.com/mattbodily/sql-two
+
 ## Schema
 
 The `schema` is the blueprint for how our tables are structured. This is what sets the guidelines for how the data is stored inside of our database.
