@@ -1,4 +1,4 @@
-# SQL TWO
+# SQL Two
 
 In this lecture we go over a review of the last sql lecture and start going into table relationships.
 
