@@ -1,13 +1,36 @@
 # SQL Two
 
-In this lecture we go over a review of the last sql lecture and start going into table relationships.
+In this lecture we go over a review of the last SQL lecture, introduce table relationships, set up tables with primary and foreign key relationships, review how to alter tables, and other advanced SQL topics including subqueries and aliasing.
 
 ## Lecture Slides
 
 https://slides.com/mattbodily/sql-two
 
-## Schema
+# Student Learning Objectives
 
+  - Students can use the `alter` keyword to add columns to database tables
+  - Students can use the `alter` keyword to change column data types in database tables
+  - Students can use the `alter` keyword to rename columns in database tables
+  - Students can use the `alter` keyword to remove columns from database tables
+  - Students can use the `alter` keyword to change the name of database tables
+  - Students can use the `alter` keyword to change the name of database tables
+  - Students can use the `drop` keyword to delete a database table
+  - Students understand `relational` databases and the importance of relationships between different database tables
+  - Students understand a one-to-one table relationship
+  - Students understand a one-to-many table relationship
+  - Students understand a many-to-many table relationship
+  - Students understand and can explain the importance of using foreign keys in database tables
+  - Students understand the importance of using a join table in a many-to-many relationship
+  - Students can use a `join` statement to select data from multiple joined database tables
+  - Students can use table name aliases as part of SQL statements
+  - Students understand and can use a `subquery` in place of a `join` statement to select data from multiple database tables
+
+
+# SQL 1 Lecture Content Review
+
+<details>
+<summary> Database Schemas </summary>
+<br/>
 The `schema` is the blueprint for how our tables are structured. This is what sets the guidelines for how the data is stored inside of our database.
 
 A schema for our table above would look similar to this
@@ -21,243 +44,44 @@ CREATE TABLE racers (
 )
 ```
 
-Above, we are determining exactly what datatypes are allowed to be inserted into each column for the row that is being added to our racers table in our database.
+Above, we are determining exactly what data types are allowed to be inserted into each column for the row that is being added to our racers table in our database.
 
-## DataTypes
+</details>
 
+<details>
+<summary> Data Types</summary>
+<br/>
 When setting up our schema we will determine what `data type` is allowed in our columns. There are many types out there, but we will cover the main ones.
 
 ### Empty Values
 
-`Null` - This data type means an empty value.
+`Null` - This data type means an empty value
 
 ### Numeric Values
 
-`Integer` - This data type will define a round number.
+`Integer` - This data type will define a round number
 
-`Decimal` - This data type can have unlimited decimal values.
+`Decimal` - This data type can have unlimited decimal values
 
-`Float` - This data type can have values up to 15 decimal places.
+`Float` - This data type can have values up to 15 decimal places
 
-`Serial` - This data type is an incrementing integer, usually used with primary keys to establish uniqueness.
+`Serial` - This data type is an automatic incrementing integer, usually used with primary keys to establish uniqueness. This value is automatically assigned when a new row of data is created in the table.
 
 ### Character Values
 
-`Text` - This data type declares unlimited characters in a string.
+`Text` - This data type declares unlimited characters in a string
 
-`Varchar(n)` - This data type will allow you to determine how many characters are allowed.
+`Varchar(n)` - This data type will allow you to determine how many characters are allowed
 
 ### Boolean Values
 
 `Boolean` - This data type is either true or false
 
-## Statements
-
-SQL statements are queries that we make to our database.
-
-A few things to note about SQL Statements:
-
-1. We use a semicolon to declare the end of a statement.
-
-2. We can not have a trailing comma on our scripts. 
-
-3. We need to use single quotes, not double.
-
-4. It's common to use all caps, but it's not needed. It's best to stick with one way and be consistent and not use lowercase and capital characters.
-
-### Insert Statement
-
-We can use `insert statements` to add data into our tables. The syntax for an insert statement looks like the following.
-
-```sql
-INSERT INTO racers
-(name, age, country)
-VALUES
-('Tayte', 22, 'US')
-```
-
-Above, we are adding myself into the database. We first declare a insert statement with the `INSERT INTO` keyword followed by the name of the table we are inserting data into. In parenthesis, we select the columns to add to. Use the `VALUES` keyword followed by another pair of parenthesis to include the data to insert into the columns.
-
-> Note: It's important that the data lines up with the column we want to insert that data into.
-
-### Select Statement
-
-`Select` statements are used to query our database for information. The structure for a `select` statement looks like the following.
-
-```sql
-SELECT *
-FROM racers
-```
-
-Above, we declare it's a select statement using the `SELECT` keyword. It is followed by the column name that we want to select data from. In this case, we used an asterisk to say 'all' the data from every column. Then we declare what table to select from using the `FROM` keyword.
-
-#### WHERE
-
-We can use a `where clause` to add a filter to our select statements.
-
-```sql
-SELECT *
-FROM racers
-WHERE name = 'Tayte'
-```
-
-##### Comparison Operators
-
-`>` - Greater than.
-
-```sql
-SELECT *
-FROM racers
-WHERE id > 2
-```
-
-`<` - Less than.
-
-```sql
-SELECT *
-FROM racers
-WHERE id < 2
-```
-
-`>=` - Greater than or equal to.
-
-```sql
-SELECT *
-FROM racers
-WHERE id >= 2
-```
-
-`<=` - Less than or equal to.
-
-```sql
-SELECT *
-FROM racers
-WHERE id <= 2
-```
-
-`!=` - Does not equate.
-
-```sql
-SELECT *
-FROM racers
-WHERE id != 2
-```
-
-##### Logical Operators
-
-`AND` - Check for multiple conditions to be true.
-
-```sql
-SELECT *
-FROM racers
-WHERE id != 2
-AND id < 3
-```
-
-`OR` - Check for only one of multiple conditions to be true.
-
-```sql
-SELECT *
-FROM racers
-WHERE name = 'Tayte'
-OR id = 2
-```
-
-##### Null and Not Null
-
-`IS NULL` - Checks for a value to be null.
-
-```sql
-SELECT *
-FROM racers
-WHERE name IS NULL
-```
-
-`IS NOT NULL` - Checks for a value NOT to be null.
-
-```sql
-SELECT *
-FROM racers
-WHERE name IS NOT NULL
-```
-
-##### IN Condition
-
-`IN` - This is used as shorthand syntax to act as multiple `OR` conditions.
-
-```sql
-SELECT *
-FROM racers
-WHERE name IN ('Tayte', 'Samual', 'Kevin');
-```
-
-If we didn't use the `IN` keyword, our statement would look like this
-
-```sql
-SELECT *
-FROM racers
-WHERE name = 'Tayte'
-OR name = 'Samual'
-OR name = 'Kevin';
-```
-
-##### BETWEEN Condition
-
-`BETWEEN` - This is used to retrieve values in between a range.
-
-```sql
-SELECT *
-FROM racers
-WHERE id BETWEEN 1 AND 3;
-```
-
-#### LIMIT
-
-The `LIMIT` clause will allow you to return a certain amount of rows from a select statement.
-
-```sql
-SELECT *
-FROM racers
-LIMIT 2
-```
-
-This would return the first two rows of data from the racers table.
-
-#### ORDER BY
-
-`ORDER BY` - This clause will sort the records in our result. This clause can only be used in select statements.
-
-```sql
-SELECT *
-FROM racers
-ORDER BY id
-```
-
-This will organize our result in ascending order by default.
-
-##### ASC
-
-`ASC` is the keyword we can use with order by to sort our records in the result in ascending order.
-
-
-```sql
-SELECT *
-FROM racers
-ORDER BY id ASC
-```
-
-##### DESC
-
-`DESC` is the keyword we can use with order by to sort our records in the result in descending order.
-
-
-```sql
-SELECT *
-FROM racers
-ORDER BY id DESC
-```
-
-### SQL Functions
+</details>
+
+<details>
+<summary> SQL Functions </summary>
+<br/>
 
 There are "functions" that we can use with PostgreSQL. This will usually handle some sort of mathematical logic for us.
 
@@ -306,20 +130,263 @@ FROM racers
 
 Above, we have found the average age of the racers.
 
-### Update Statements
+</details>
 
+<details>
+<summary> SQL Statements</summary>
+<br/>
+SQL statements are queries that we make to our database.
+
+A few things to note about SQL Statements:
+
+1. We use a semicolon to declare the end of a statement
+
+2. We can not have a trailing comma on our scripts 
+
+3. We need to use single quotes, not double quotes
+
+4. It's common to use all caps, but it's not needed. It's best to stick with one way and be consistent and not use lowercase and capital characters.
+
+### Common Statements
+<details>
+<summary> Select Statement</summary>
+<br/>
+Select statements are used to query our database for information. The structure for a `select` statement looks like the following.
+
+```sql
+SELECT *
+FROM racers
+```
+
+Above, we declare it's a select statement using the `SELECT` keyword. It is followed by the column name that we want to select data from. In this case, we used an asterisk to say 'all' the data from every column. Then we declare what table to select from using the `FROM` keyword.
+
+Other SQL keywords that are commonly used in `select` statements include `where`, `limit`, and `order by`.
+
+<details open>
+<summary> WHERE</summary>
+<br/>
+We can use a `where clause` to add a filter to our select statements.
+
+```sql
+SELECT *
+FROM racers
+WHERE name = 'Matt'
+```
+
+This `where clause` can use a number of different operators and conditional keywords to further filter the data returned as part of the `select` statement
+
+<details>
+<summary> Comparison Operators</summary>
+<br/>
+
+`>` - Greater than.
+
+```sql
+SELECT *
+FROM racers
+WHERE id > 2
+```
+
+`<` - Less than.
+
+```sql
+SELECT *
+FROM racers
+WHERE id < 2
+```
+
+`>=` - Greater than or equal to.
+
+```sql
+SELECT *
+FROM racers
+WHERE id >= 2
+```
+
+`<=` - Less than or equal to.
+
+```sql
+SELECT *
+FROM racers
+WHERE id <= 2
+```
+
+`!=` - Does not equate.
+
+```sql
+SELECT *
+FROM racers
+WHERE id != 2
+```
+
+</details>
+
+<details>
+<summary> Logical Operators</summary>
+<br/>
+`AND` - Check for multiple conditions to be true.
+
+```sql
+SELECT *
+FROM racers
+WHERE id != 2
+AND id < 3
+```
+
+`OR` - Check for only one of multiple conditions to be true.
+
+```sql
+SELECT *
+FROM racers
+WHERE name = 'Matt'
+OR id = 2
+```
+</details>
+
+<details>
+<summary> Null and Not Null</summary>
+<br/>
+`IS NULL` - Checks for a value to be null.
+
+```sql
+SELECT *
+FROM racers
+WHERE name IS NULL
+```
+
+`IS NOT NULL` - Checks for a value NOT to be null.
+
+```sql
+SELECT *
+FROM racers
+WHERE name IS NOT NULL
+```
+</details>
+
+<details>
+<summary> IN Condition</summary>
+<br/>
+`IN` - This is used as shorthand syntax to act as multiple `OR` conditions.
+
+```sql
+SELECT *
+FROM racers
+WHERE name IN ('Matt', 'Andrew', 'Lucas');
+```
+
+If we didn't use the `IN` keyword, our statement would look like this
+
+```sql
+SELECT *
+FROM racers
+WHERE name = 'Matt'
+OR name = 'Andrew'
+OR name = 'Lucas';
+```
+</details>
+
+<details>
+<summary> BETWEEN Condition</summary>
+<br/>
+`BETWEEN` - This is used to retrieve values in between a range.
+
+```sql
+SELECT *
+FROM racers
+WHERE id BETWEEN 1 AND 3;
+```
+</details>
+</details>
+
+<details>
+<summary> LIMIT</summary>
+<br/>
+
+The `LIMIT` clause will allow you to return a certain amount of rows from a select statement.
+
+```sql
+SELECT *
+FROM racers
+LIMIT 2
+```
+
+This would return the first two rows of data from the racers table.
+
+</details>
+
+<details>
+<summary> ORDER BY</summary>
+<br/>
+
+`ORDER BY` - This clause will sort the records in our result. This clause can only be used in select statements.
+
+```sql
+SELECT *
+FROM racers
+ORDER BY id
+```
+
+This will organize our result in ascending order by default.
+
+##### ASC
+
+`ASC` is the keyword we can use with order by to sort our records in the result in ascending order.
+
+
+```sql
+SELECT *
+FROM racers
+ORDER BY id ASC
+```
+
+##### DESC
+
+`DESC` is the keyword we can use with order by to sort our records in the result in descending order.
+
+
+```sql
+SELECT *
+FROM racers
+ORDER BY id DESC
+```
+</details>
+</details>
+
+<details>
+<summary> Insert Statement</summary>
+<br/>
+We can use `insert statements` to add data into our tables. The syntax for an insert statement looks like the following.
+
+```sql
+INSERT INTO racers
+(name, age, country)
+VALUES
+('Matt', 27, 'US')
+```
+
+Above, we are adding a racer `Matt` into the database. We first declare a insert statement with the `INSERT INTO` keyword followed by the name of the table we are inserting data into. In parenthesis, we select the columns to add to. Use the `VALUES` keyword followed by another pair of parenthesis to include the data to insert into the columns.
+
+> Note: It's important that the data lines up with the column we want to insert that data into
+
+</details>
+
+<details>
+<summary> Update Statements</summary>
+<br/>
 We can update our data inside of a database by using an `update` statement.
 
 ```sql
 UPDATE racers
-SET name = 'Chris'
+SET name = 'Scott'
 WHERE id = 2
 ```
 
-Above, we have just updated the name for the user with the id of 2. We first use the `UPDATE` keyword followed by the name of the table we are updating. Then we `SET` the name to "Chris" where the user id equals 2.
+Above, we have just updated the name for the user with the id of 2. We first use the `UPDATE` keyword followed by the name of the table we are updating. Then we `SET` the name to "Scott" where the user id equals 2.
+</details>
 
-### Delete Statements
-
+<details>
+<summary> Delete Statements</summary>
+<br/>
 We can remove or destroy data from our database by using a `delete` statement.
 
 ```sql
@@ -330,6 +397,11 @@ WHERE id = 2
 We first use the `DELETE FROM` keyword, then declare the table to remove from. We then choose the id of the racer we want to remove.
 
 > Make sure to add the where clause or you would remove everything in the table!
+
+</details>
+</details>
+
+# SQL 2 Lecture Content
 
 ## Altering Tables
 
@@ -394,6 +466,14 @@ We can drop our tables, if we feel the need to remove them. Be careful doing thi
 
 ```sql
 DROP TABLE racers
+```
+
+## Distinct
+
+`DISTINCT` is the keyword we can use when we don't want any duplications in datasets
+
+```sql
+SELECT DISTINCT country FROM racers;
 ```
 
 ## Table Relationships
@@ -487,10 +567,22 @@ WHERE racerid IN (
 )
 ```
 
-## Distinct
+# Additional Resources
 
-`DISTINCT` is the keyword we can use when we don't want any duplications of datasets.
+* https://www.postgresql.org/docs/ - The official docs of PostgreSQL. These are a comprehensive resource on everything PostgreSQL
+* http://www.postgresqltutorial.com/ - These are more user-friendly and accessible guides on using PostgreSQL. Highly encourage beginners to look here. 
+* https://www.youtube.com/watch?v=qw--VYLpxG4 - Although this is a very long tutorial(4hrs and 20mins) for learning PostgreSQL from freeCodeCamp.org, it is much more comprehensive than the material covered in these lecture notes and provides a baseline for practicing more advanced features included in the PostgreSQL querying language
+* Database Diagram Design Tools
+  1. https://dbdiagram.io/home - Useful design tool that produces SQL code for you based on the diagrams you create.
+  > Note: Even when you specify that the software produced code should be formatted in PostgreSQL, you should **NOT** trust that it is entirely syntactically correct.
+  2. https://draw.io - A very basic, but free diagramming tool. Can be used for wireframing or creating charts/diagrams beyond database tables. 
+  3. https://lucidchart.com - A more elegant and feature-rich collaborative diagramming tool.
+  > Note: The free plan is limited to 3 diagrams and 60 objects per diagram. 
+ 
+# SQL 2 Mini Project
 
-```sql
-SELECT DISTINCT country FROM racers;
-```
+https://github.com/DevMountain/sql-2-mini
+
+# SQL 2 Afternoon Project
+
+https://github.com/DevMountain/sql-2-afternoon
