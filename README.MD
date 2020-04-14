@@ -2,11 +2,17 @@
 
 In this lecture we go over a review of the last SQL lecture, introduce table relationships, set up tables with primary and foreign key relationships, review how to alter tables, and other advanced SQL topics including subqueries and aliasing.
 
-## Lecture Slides
+Lecture Slides: https://slides.com/dmweb/copy-of-sql-2
 
-https://slides.com/mattbodily/sql-two
+Mini Project: https://github.com/DevMountain/sql-2-mini
 
-# Student Learning Objectives
+Afternoon Project: https://github.com/DevMountain/sql-2-afternoon
+
+> NOTE: Both the mini and afternoon projects will be completed on https://postgres.devmountain.com
+>
+> Students should comment their queries as they go and then send them to their mentor over slack upon completion.
+
+## Student Learning Objectives
 
   - Students can use the `alter` keyword to add columns to database tables
   - Students can use the `alter` keyword to change column data types in database tables
